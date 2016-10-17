@@ -90,8 +90,12 @@ def substitutionEncryption(s, sub):
 
 def substitutionInverse(sub):
     # !! Replace the next line with code to compute and return the inverse.
+	l = [""]*26
+	for i in range(len(sub)):
+	    print(indexFromLetter(sub[i]))
+	    l[indexFromLetter(sub[i])]=letterFromIndex(i)
+	return "".join(l)
 
-    return sub
 
 # This function is correct as it is written. Do not alter it.
 # It will work once you have a working version of substitutionInverse.
@@ -151,7 +155,7 @@ def frequencies(string):
 	return freqs
 
 def main():
-	s = "CARLETON COLLEGE CS YEAH"
+	s = "VAFGRNQBSZNCCVATBIREYVFGNBEYVFGOZNCBIRENENATR."
 	print("plaintext:")
 	print(s)
 	print("rail fence:")
