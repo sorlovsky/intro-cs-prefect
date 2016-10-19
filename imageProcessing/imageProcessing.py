@@ -126,6 +126,9 @@ def imageThreaded(imageWindowA, imageWindowB, rgbFunc):
 def averageRGB(rgbA, rgbB):
 	return [(rgbA[0] + rgbB[0]) // 2, (rgbA[1] + rgbB[1]) // 2, (rgbA[2] + rgbB[2]) // 2]
 
+def maxRGB(rgbA, rgbB):
+	return [max(rgbA[0], rgbB[0]), max(rgbA[1], rgbB[1]), max(rgbA[2], rgbB[2])]
+
 
 
 ### USER CUSTOMIZATION ###
@@ -139,11 +142,41 @@ def redImage(imageWindow):
 			setPixelRGB(newImageWindow, x, y, newRGB)
 	return newImageWindow
 
+def greyImage(imageWindow):
+	newImageWindow = emptyImageWindow(imageWindow)
+	for x in range(imageWidth(imageWindow)):
+		for y in range(imageHeight(imageWindow)):
+			rgb = pixelRGB(imageWindow, x, y)
+			ave = (rgb[0]+rgb[1]+rgb[2])/3
+			setPixelRGB(newImageWindow, ave, ave, ave)
+	return newImageWindow
+
+def greenScreenRGB(rgbActor, rgbBackground):
+	'''Given two RGB colors, returns one or the other, depending on whether the first one is "green".'''
+	print(rgbActor)
+	if rgbActor[0] > 45 and rgbActor[1] > 100 and rgbActor[2] < 100:
+		return rgbBackground
+	return rgbActor
+
+
+def greenScreenedImage(actorImageWindow, backgroundImageWindow):
+	'''Given two image windows (with images of the same size), returns a new image window, formed by green-screening the actor against the background.'''
+	return imageThreaded(actorImageWindow, backgroundImageWindow, greenScreenRGB)
+
+
 def main():
 	# Load, alter, and draw an image.
-	imageWindow = imageWindowFromFile("barackObama.jpg")
-	imageWindow = redImage(imageWindow)
+	# imageWindow2 = imageWindowFromFile("elcapitan.jpg")
+	imageWindow = imageWindowFromFile("paris.gif")
 	drawImage(imageWindow)
+	# imageWindowNew = imageThreaded(imageWindow, imageWindow2, greenScreenRGB)
+	# green = greenScreenedImage(imageWindow, imageWindow2)
+	ic1 = imageConvolved(imageWindow, [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+	ic2 = imageConvolved(imageWindow, [[1, 0, -1], [2, 0, -2], [1, 0, -1]])
+	edge = imageThreaded(ic1, ic2, maxRGB)
+
+	drawImage(edge)
+	# greyImage(edge)
 	# Let the user sample pixels.
 	xy = mouseXY(imageWindow)
 	while 0 <= xy[0] < imageWidth(imageWindow) and 0 <= xy[1] < imageHeight(imageWindow):
