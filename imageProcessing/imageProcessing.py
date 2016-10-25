@@ -133,13 +133,30 @@ def maxRGB(rgbA, rgbB):
 
 ### USER CUSTOMIZATION ###
 
-def redImage(imageWindow):
+# def redImage(imageWindow):
+# 	newImageWindow = emptyImageWindow(imageWindow)
+# 	for x in range(imageWidth(imageWindow)):
+# 		for y in range(imageHeight(imageWindow)):
+# 			rgb = pixelRGB(imageWindow, x, y)
+# 			newRGB = [rgb[0], 0, 0]
+# 			setPixelRGB(newImageWindow, x, y, newRGB)
+# 	return newImageWindow
+
+def swapImage(imageWindow):
 	newImageWindow = emptyImageWindow(imageWindow)
 	for x in range(imageWidth(imageWindow)):
 		for y in range(imageHeight(imageWindow)):
 			rgb = pixelRGB(imageWindow, x, y)
-			newRGB = [rgb[0], 0, 0]
-			setPixelRGB(newImageWindow, x, y, newRGB)
+			if rgb[0] > 170 and rgb[1] < 80 and rgb[2] < 80:
+				newRGB = [255, 252, 0]
+				setPixelRGB(newImageWindow, x, y, newRGB)
+				print("hello")
+			elif rgb[2] > 100 and rgb[0] < 100:
+				newRGB = [120,231,131]
+				setPixelRGB(newImageWindow, x, y, newRGB)
+				rgb[0]
+			else:
+				setPixelRGB(newImageWindow, x, y, rgb)
 	return newImageWindow
 
 def greyImage(imageWindow):
@@ -167,15 +184,17 @@ def greenScreenedImage(actorImageWindow, backgroundImageWindow):
 def main():
 	# Load, alter, and draw an image.
 	# imageWindow2 = imageWindowFromFile("elcapitan.jpg")
-	imageWindow = imageWindowFromFile("paris.gif")
+	imageWindow = imageWindowFromFile("linkedin-smaller.png")
 	drawImage(imageWindow)
 	# imageWindowNew = imageThreaded(imageWindow, imageWindow2, greenScreenRGB)
 	# green = greenScreenedImage(imageWindow, imageWindow2)
-	ic1 = imageConvolved(imageWindow, [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
-	ic2 = imageConvolved(imageWindow, [[1, 0, -1], [2, 0, -2], [1, 0, -1]])
-	edge = imageThreaded(ic1, ic2, maxRGB)
+	# ic1 = imageConvolved(imageWindow, [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+	# ic2 = imageConvolved(imageWindow, [[1, 0, -1], [2, 0, -2], [1, 0, -1]])
+	# edge = imageThreaded(ic1, ic2, maxRGB)
+	newImage = swapImage(imageWindow)
+	newImage[0].save("img1.png")
 
-	drawImage(edge)
+	drawImage(newImage)
 	# greyImage(edge)
 	# Let the user sample pixels.
 	xy = mouseXY(imageWindow)
