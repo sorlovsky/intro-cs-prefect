@@ -183,20 +183,22 @@ def drawKoch(t, length, detail):
         drawKoch(t, length / 3.0, detail - 1)
 
 def main():
-    startTime = time.clock()
-    for i in range(32):
-        temp = fibonacciIteratively(i)
-    endTime = time.clock()
-    print()
-    print("Iterative Fibonacci took", endTime - startTime, "seconds")
-    startTime = time.clock()
-    for i in range(32):
-        temp = fibonacciRecursively(i)
-    endTime = time.clock()
-    print()
-    print("Recursive Fibonacci took", endTime - startTime, "seconds")
-    #drawTree(turtle.getturtle(), 100)
-    drawSierpinski(turtle.getturtle(), (-200, -173), (200, -173), (0, 173), 6)
+    # for i in range(10):
+    print(fibonacciRecursively(0))
+    # startTime = time.clock()
+    # for i in range(32):
+    #     temp = fibonacciIteratively(i)
+    # endTime = time.clock()
+    # print()
+    # print("Iterative Fibonacci took", endTime - startTime, "seconds")
+    # startTime = time.clock()
+    # for i in range(32):
+    #     temp = fibonacciRecursively(i)
+    # endTime = time.clock()
+    # print()
+    # print("Recursive Fibonacci took", endTime - startTime, "seconds")
+    # #drawTree(turtle.getturtle(), 100)
+    # drawSierpinski(turtle.getturtle(), (-200, -173), (200, -173), (0, 173), 6)
     #drawLogarithmicSpiral(turtle.getturtle(), 200.0, 190.0, 20, 18)
     #drawKoch(turtle.getturtle(), 300, 4)
 

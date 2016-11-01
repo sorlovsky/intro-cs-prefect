@@ -184,7 +184,7 @@ def greenScreenedImage(actorImageWindow, backgroundImageWindow):
 def main():
 	# Load, alter, and draw an image.
 	# imageWindow2 = imageWindowFromFile("elcapitan.jpg")
-	imageWindow = imageWindowFromFile("linkedin-smaller.png")
+	# imageWindow = imageWindowFromFile("")
 	drawImage(imageWindow)
 	# imageWindowNew = imageThreaded(imageWindow, imageWindow2, greenScreenRGB)
 	# green = greenScreenedImage(imageWindow, imageWindow2)
